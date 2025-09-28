@@ -124,14 +124,14 @@ with tab_browse:
 
     where_sql = f"WHERE {' AND '.join(where_clauses)}" if where_clauses else ""
 
-    count_sql = f'SELECT COUNT(*) FROM "Bagdad" {where_sql};'
+    count_sql = f'SELECT COUNT(*) FROM "Babil" {where_sql};'
     offset = (st.session_state.page - 1) * page_size
     data_sql = f'''
         SELECT
             "رقم الناخب","الاسم الثلاثي","الجنس","هاتف","رقم العائلة",
             "اسم مركز الاقتراع","رقم مركز الاقتراع",
             "المدينة","رقم مركز التسجيل","اسم مركز التسجيل","تاريخ الميلاد"
-        FROM "Bagdad"
+        FROM "Babil"
         {where_sql}
         ORDER BY "رقم الناخب" ASC
         LIMIT %s OFFSET %s;
@@ -194,7 +194,7 @@ with tab_single:
                 SELECT "رقم الناخب","الاسم الثلاثي","الجنس","هاتف","رقم العائلة",
                        "اسم مركز الاقتراع","رقم مركز الاقتراع",
                        "المدينة","رقم مركز التسجيل","اسم مركز التسجيل","تاريخ الميلاد"
-                FROM "Bagdad" WHERE "رقم الناخب" LIKE %s
+                FROM "Babil" WHERE "رقم الناخب" LIKE %s
             """
             df = pd.read_sql_query(query, conn, params=(voter_input.strip(),))
             conn.close()
@@ -238,7 +238,7 @@ with tab_file:
                 SELECT "رقم الناخب","الاسم الثلاثي","الجنس","هاتف","رقم العائلة",
                        "اسم مركز الاقتراع","رقم مركز الاقتراع",
                        "المدينة","رقم مركز التسجيل","اسم مركز التسجيل","تاريخ الميلاد"
-                FROM "Bagdad" WHERE "رقم الناخب" IN ({placeholders})
+                FROM "Babil" WHERE "رقم الناخب" IN ({placeholders})
             """
             df = pd.read_sql_query(query, conn, params=voters_list)
             conn.close()
@@ -425,7 +425,7 @@ with tab_ocr:
                         SELECT "رقم الناخب","الاسم الثلاثي","الجنس","هاتف","رقم العائلة",
                                "اسم مركز الاقتراع","رقم مركز الاقتراع",
                                "المدينة","رقم مركز التسجيل","اسم مركز التسجيل","تاريخ الميلاد"
-                        FROM "Bagdad" WHERE "رقم الناخب" IN ({placeholders})
+                        FROM "Babil" WHERE "رقم الناخب" IN ({placeholders})
                     """
                     df = pd.read_sql_query(query, conn, params=all_voters)
                     conn.close()
@@ -531,7 +531,7 @@ with tab_count:
                         SELECT "رقم الناخب","الاسم الثلاثي","الجنس","هاتف","رقم العائلة",
                                "اسم مركز الاقتراع","رقم مركز الاقتراع",
                                "المدينة","رقم مركز التسجيل","اسم مركز التسجيل","تاريخ الميلاد"
-                        FROM "Bagdad" WHERE "رقم الناخب" IN ({placeholders})
+                        FROM "Babil" WHERE "رقم الناخب" IN ({placeholders})
                     """
                     found_df = pd.read_sql_query(query, conn, params=unique_numbers)
                     conn.close()
