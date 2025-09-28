@@ -20,7 +20,7 @@ load_dotenv()
 USERNAME = "admin"
 PASSWORD = "Moraqip@123"
 
-st.set_page_config(page_title="المراقب الذكي", layout="wide")
+st.set_page_config(page_title="بيانات بابل", layout="wide")
 
 # ---- إعداد Google Vision من secrets ----
 def setup_google_vision():
